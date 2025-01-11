@@ -1,0 +1,15 @@
+Résultats de la session course_principale :
+
+Voitures ayant terminé la course (classées) :
+Position 1 : Voiture 2, Temps : 83.00 s
+
+Voitures ayant abandonné :
+Voiture 27 : Abandon
+Voiture 10 : Abandon
+Voiture 63 : Abandon
+Voiture 14 : Abandon
+Voiture 77 : Abandon
+Voiture 1 : Abandon
+Voiture 16 : Abandon
+Voiture 31 : Abandon
+Voiture 20 : Abandon

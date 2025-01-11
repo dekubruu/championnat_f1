@@ -1,0 +1,15 @@
+Résultats de la session qualification_finale :
+
+Voitures ayant terminé la course (classées) :
+Position 1 : Voiture 27, Temps : 77.00 s
+Position 2 : Voiture 63, Temps : 80.00 s
+Position 3 : Voiture 14, Temps : 80.00 s
+Position 4 : Voiture 77, Temps : 80.00 s
+Position 5 : Voiture 1, Temps : 82.00 s
+Position 6 : Voiture 16, Temps : 82.00 s
+Position 7 : Voiture 10, Temps : 83.00 s
+Position 8 : Voiture 31, Temps : 83.00 s
+Position 9 : Voiture 2, Temps : 83.00 s
+Position 10 : Voiture 20, Temps : 85.00 s
+
+Voitures ayant abandonné :

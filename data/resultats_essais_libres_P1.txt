@@ -1,0 +1,25 @@
+Résultats de la session essais_libres_P1 :
+
+Voitures ayant terminé la course (classées) :
+Position 1 : Voiture 63, Temps : 80.00 s
+Position 2 : Voiture 10, Temps : 83.00 s
+Position 3 : Voiture 31, Temps : 83.00 s
+Position 4 : Voiture 18, Temps : 86.00 s
+Position 5 : Voiture 27, Temps : 86.00 s
+Position 6 : Voiture 14, Temps : 87.00 s
+Position 7 : Voiture 1, Temps : 89.00 s
+Position 8 : Voiture 24, Temps : 89.00 s
+Position 9 : Voiture 2, Temps : 90.00 s
+Position 10 : Voiture 77, Temps : 91.00 s
+Position 11 : Voiture 11, Temps : 92.00 s
+Position 12 : Voiture 16, Temps : 92.00 s
+Position 13 : Voiture 20, Temps : 92.00 s
+Position 14 : Voiture 3, Temps : 93.00 s
+Position 15 : Voiture 4, Temps : 94.00 s
+Position 16 : Voiture 55, Temps : 95.00 s
+Position 17 : Voiture 23, Temps : 95.00 s
+Position 18 : Voiture 44, Temps : 98.00 s
+Position 19 : Voiture 81, Temps : 100.00 s
+Position 20 : Voiture 22, Temps : 100.00 s
+
+Voitures ayant abandonné :

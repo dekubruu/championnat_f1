@@ -1,0 +1,69 @@
+// championnat.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "championnat.h"
+
+#define MAX_VOITURES 20
+
+typedef struct {
+    int numero;
+    int points;
+} Classement;
+
+void mettre_a_jour_classement(Voiture *voitures, int nombre_voitures) {
+    Classement classement[MAX_VOITURES];
+    int nb_classees = 0;
+
+    // Ouvrir le fichier classement existant (s'il existe)
+    FILE *fichier = fopen("data/classement_championnat.txt", "r");
+    if (fichier != NULL) {
+        while (fscanf(fichier, "Voiture %d : %d points", &classement[nb_classees].numero, &classement[nb_classees].points) == 2) {
+            nb_classees++;
+        }
+        fclose(fichier);
+    }
+
+    // Barème des points
+    int points_barre[] = {25, 18, 15, 12, 10, 8, 6, 4, 2, 1};
+
+    // Mise à jour des points pour les voitures ayant terminé la course
+    for (int i = 0; i < nombre_voitures; i++) {
+        for (int j = 0; j < nb_classees; j++) {
+            if (classement[j].numero == voitures[i].numero) {
+                classement[j].points += points_barre[i];
+                break;
+            }
+            if (j == nb_classees - 1) {
+                // Nouvelle voiture à ajouter au classement
+                classement[nb_classees].numero = voitures[i].numero;
+                classement[nb_classees].points = points_barre[i];
+                nb_classees++;
+            }
+        }
+    }
+
+    // Trier le classement par points (ordre décroissant)
+    qsort(classement, nb_classees, sizeof(Classement), comparer_points);
+
+    // Sauvegarder le classement mis à jour
+    fichier = fopen("data/classement_championnat.txt", "w");
+    if (fichier == NULL) {
+        printf("Erreur lors de l'ouverture du fichier classement_championnat.txt\n");
+        return;
+    }
+
+    fprintf(fichier, "Classement du championnat :\n");
+    for (int i = 0; i < nb_classees; i++) {
+        fprintf(fichier, "Position %d : Voiture %d, Points : %d\n", i + 1, classement[i].numero, classement[i].points);
+    }
+
+    fclose(fichier);
+    printf("Classement mis à jour et sauvegardé dans data/classement_championnat.txt\n");
+}
+
+int comparer_points(const void *a, const void *b) {
+    Classement *voitureA = (Classement *)a;
+    Classement *voitureB = (Classement *)b;
+    return voitureB->points - voitureA->points;
+}
