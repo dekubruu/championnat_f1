@@ -1,37 +1,62 @@
+// main.c
 #include <stdio.h>
-#include "voiture.h"
+#include <stdlib.h>
+#include <time.h>
 #include "session.h"
+#include "voiture.h"
+
+#define NOMBRE_VOITURES 20
+#define NOMBRE_TOURS_COURSE 10
 
 int main() {
-    int numeros_voitures[] = {1, 11, 44, 63, 16, 55, 4, 81, 14, 18, 10, 31, 23, 2, 22, 3, 77, 24, 20, 27};
-    int nombre_voitures = 20;
-    Voiture voitures[nombre_voitures];
+    Voiture listePilotes[NOMBRE_VOITURES];
+    int nombre_pilotes = NOMBRE_VOITURES;
 
-    // Initialisation des voitures
-    for (int i = 0; i < nombre_voitures; i++) {
-        initialiser_voiture(&voitures[i], numeros_voitures[i]);
-    }
+    srand(time(NULL)); // Initialisation de la graine aléatoire
 
-    // Simulation de la session d'essais (5 tours)
-    printf("Début de la séance d'essais...\n");
-    for (int tour = 0; tour < 5; tour++) {
-        printf("Tour %d :\n", tour + 1);
-        for (int i = 0; i < nombre_voitures; i++) {
-            generer_temps(&voitures[i]);
-            printf("Voiture %d : %.2f s\n", voitures[i].numero, voitures[i].meilleur_temps);
+    // Initialisation des pilotes
+    initialiserPilotes(listePilotes, nombre_pilotes);
+
+    int choix;
+    do {
+        printf("\n=== Menu Principal ===\n");
+        printf("1. Lancer les essais libres P1\n");
+        printf("2. Lancer les essais libres P2\n");
+        printf("3. Lancer les essais libres P3\n");
+        printf("4. Lancer les qualifications\n");
+        printf("5. Lancer la course principale\n");
+        printf("6. Afficher les résultats finaux\n");
+        printf("7. Quitter\n");
+        printf("Entrez votre choix : ");
+        scanf("%d", &choix);
+
+        switch (choix) {
+            case 1:
+                lancerEssaisP1(listePilotes, nombre_pilotes);
+                break;
+            case 2:
+                lancerEssaisP2(listePilotes, nombre_pilotes);
+                break;
+            case 3:
+                lancerEssaisP3(listePilotes, nombre_pilotes);
+                break;
+            case 4:
+                lancerQualifications(listePilotes, nombre_pilotes);
+                break;
+            case 5:
+                lancerCourse(listePilotes, nombre_pilotes);
+                break;
+            case 6:
+                afficherClassementFinal(listePilotes, nombre_pilotes);
+                break;
+            case 7:
+                printf("Merci d'avoir utilisé le programme. Au revoir !\n");
+                break;
+            default:
+                printf("Choix invalide. Veuillez réessayer.\n");
         }
-        printf("\n");
-    }
 
-    // Sauvegarde des résultats des essais
-    sauvegarder_resultats(voitures, nombre_voitures, "essais_libres_P1");
-
-    // Simulation des qualifications
-    simuler_qualification(voitures, nombre_voitures);
-
-    // Simulation de la course principale (50 tours)
-    simuler_course(voitures, 10, 50);
-
+    } while (choix != 7);
 
     return 0;
 }
