@@ -3,21 +3,13 @@
 
 #include "voiture.h"
 
-// Prototypes des fonctions
-void sauvegarder_resultats(Voiture *voitures, int nombre_voitures, const char *nom_session);
-void simuler_qualification(Voiture *voitures, int nombre_voitures);
+// Fonction pour comparer les voitures selon leur meilleur temps
 int comparer_voitures(const void *a, const void *b);
-void simuler_course(Voiture *voitures, int nombre_voitures, int nombre_tours);
-void initialiserPilotes(Voiture *pilotes, int nombre_pilotes);
 
-void lancerEssaisP1(Voiture *pilotes, int nombre_pilotes);
-void lancerEssaisP2(Voiture *pilotes, int nombre_pilotes);
-void lancerEssaisP3(Voiture *pilotes, int nombre_pilotes);
+// Fonction pour sauvegarder les résultats dans un fichier
+void sauvegarder_resultats(Voiture *voitures, int nombre_voitures, const char *nom_session);
 
-void lancerQualifications(Voiture *pilotes, int nombre_pilotes);
-void lancerCourse(Voiture *pilotes, int nombre_pilotes);
-
-void afficherMeilleursTempsParSecteur(Voiture *voitures, int nombre_voitures);
-
+// Fonction pour afficher les meilleurs temps par secteur et le meilleur tour
+void afficherMeilleursTemps(Voiture *voitures, int nombre_voitures);
 
 #endif // SESSION_H

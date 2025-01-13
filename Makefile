@@ -1,19 +1,33 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11
+SRC = src
+OBJ = obj
 
-all: main
+OBJS = $(OBJ)/voiture.o $(OBJ)/session.o $(OBJ)/essais.o $(OBJ)/qualifications.o $(OBJ)/course.o $(OBJ)/main.o
+EXEC = main
 
-main: voiture.o session.o main.o
-	$(CC) $(CFLAGS) -o main voiture.o session.o main.o
+all: $(EXEC)
 
-main.o: src/main.c src/voiture.h src/session.h
-	$(CC) $(CFLAGS) -c src/main.c
+$(EXEC): $(OBJS)
+	$(CC) $(CFLAGS) -o $(EXEC) $(OBJS)
 
-voiture.o: src/voiture.c src/voiture.h
-	$(CC) $(CFLAGS) -c src/voiture.c
+$(OBJ)/main.o: $(SRC)/main.c
+	$(CC) $(CFLAGS) -c $(SRC)/main.c -o $(OBJ)/main.o
 
-session.o: src/session.c src/session.h
-	$(CC) $(CFLAGS) -c src/session.c
+$(OBJ)/voiture.o: $(SRC)/voiture.c
+	$(CC) $(CFLAGS) -c $(SRC)/voiture.c -o $(OBJ)/voiture.o
+
+$(OBJ)/session.o: $(SRC)/session.c
+	$(CC) $(CFLAGS) -c $(SRC)/session.c -o $(OBJ)/session.o
+
+$(OBJ)/essais.o: $(SRC)/essais.c
+	$(CC) $(CFLAGS) -c $(SRC)/essais.c -o $(OBJ)/essais.o
+
+$(OBJ)/qualifications.o: $(SRC)/qualifications.c
+	$(CC) $(CFLAGS) -c $(SRC)/qualifications.c -o $(OBJ)/qualifications.o
+
+$(OBJ)/course.o: $(SRC)/course.c
+	$(CC) $(CFLAGS) -c $(SRC)/course.c -o $(OBJ)/course.o
 
 clean:
-	rm -f *.o main
+	rm -f $(OBJ)/*.o $(EXEC)

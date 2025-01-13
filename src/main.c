@@ -1,20 +1,19 @@
-// main.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "session.h"
+#include "essais.h"
+#include "qualifications.h"
+#include "course.h"
 #include "voiture.h"
 
 #define NOMBRE_VOITURES 20
-#define NOMBRE_TOURS_COURSE 10
 
 int main() {
     Voiture listePilotes[NOMBRE_VOITURES];
     int nombre_pilotes = NOMBRE_VOITURES;
 
-    srand(time(NULL)); // Initialisation de la graine aléatoire
+    srand(time(NULL));
 
-    // Initialisation des pilotes
     initialiserPilotes(listePilotes, nombre_pilotes);
 
     int choix;
@@ -31,31 +30,15 @@ int main() {
         scanf("%d", &choix);
 
         switch (choix) {
-            case 1:
-                lancerEssaisP1(listePilotes, nombre_pilotes);
-                break;
-            case 2:
-                lancerEssaisP2(listePilotes, nombre_pilotes);
-                break;
-            case 3:
-                lancerEssaisP3(listePilotes, nombre_pilotes);
-                break;
-            case 4:
-                lancerQualifications(listePilotes, nombre_pilotes);
-                break;
-            case 5:
-                lancerCourse(listePilotes, nombre_pilotes);
-                break;
-            case 6:
-                afficherClassementFinal(listePilotes, nombre_pilotes);
-                break;
-            case 7:
-                printf("Merci d'avoir utilisé le programme. Au revoir !\n");
-                break;
-            default:
-                printf("Choix invalide. Veuillez réessayer.\n");
+            case 1: lancerEssaisP1(listePilotes, nombre_pilotes); break;
+            case 2: lancerEssaisP2(listePilotes, nombre_pilotes); break;
+            case 3: lancerEssaisP3(listePilotes, nombre_pilotes); break;
+            case 4: lancerQualifications(listePilotes, nombre_pilotes); break;
+            case 5: lancerCourse(listePilotes, nombre_pilotes); break;
+            case 6: afficherClassementFinal(listePilotes, nombre_pilotes); break;
+            case 7: printf("Merci d'avoir utilisé le programme. Au revoir !\n"); break;
+            default: printf("Choix invalide. Veuillez réessayer.\n");
         }
-
     } while (choix != 7);
 
     return 0;

@@ -1,21 +1,20 @@
 #ifndef VOITURE_H
 #define VOITURE_H
 
+#define MAX_NOM 20  // Taille maximale des noms
+
+// Structure représentant une voiture
 typedef struct {
-    int numero;            // Numéro de la voiture
-    char prenom[50];       // Prénom du pilote
-    char nom[50];          // Nom du pilote
-    char equipe[50];       // Nom de l'équipe
-    float meilleur_temps;  // Meilleur temps total
-    float secteurs[3];     // Temps des secteurs S1, S2, S3
-    char status;           // Statut : 'R' (roule), 'P' (stands), 'O' (out)
-    int points;            // Points accumulés
-    float meilleur_secteur[3]; // Meilleurs temps des secteurs S1, S2, S3
+    int numero;                  // Numéro de la voiture
+    char nom[MAX_NOM];           // Nom du pilote
+    char prenom[MAX_NOM];        // Prénom du pilote
+    float secteurs[3];           // Temps des 3 secteurs
+    float meilleur_temps;        // Meilleur temps global de la voiture
+    char status;                 // Statut : 'R' = Roule, 'P' = Aux stands, 'O' = Out
+    int points;                  // Points obtenus par le pilote
 } Voiture;
 
-// Prototypes des fonctions
-void initialiser_voiture(Voiture *v, int numero);
-void generer_temps(Voiture *v);
+void initialiserPilotes(Voiture *pilotes, int nombre_pilotes);
 void afficherClassementFinal(Voiture *pilotes, int nombre_pilotes);
 void attribuerPoints(Voiture *pilotes, int nombre_pilotes);
 
