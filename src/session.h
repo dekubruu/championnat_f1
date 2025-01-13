@@ -17,6 +17,7 @@ void lancerEssaisP3(Voiture *pilotes, int nombre_pilotes);
 void lancerQualifications(Voiture *pilotes, int nombre_pilotes);
 void lancerCourse(Voiture *pilotes, int nombre_pilotes);
 
+void afficherMeilleursTempsParSecteur(Voiture *voitures, int nombre_voitures);
 
 
 #endif // SESSION_H
