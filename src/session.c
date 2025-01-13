@@ -42,6 +42,29 @@ void sauvegarder_resultats(Voiture *voitures, int nombre_voitures, const char *n
                 voitures[i].secteurs[0], voitures[i].secteurs[1], voitures[i].secteurs[2]);
     }
 
+    // Déterminer et afficher les meilleurs temps par secteur et le meilleur tour global
+    float meilleurS1 = 9999.0, meilleurS2 = 9999.0, meilleurS3 = 9999.0, meilleurTour = 9999.0;
+    for (int i = 0; i < nombre_voitures; i++) {
+        if (voitures[i].secteurs[0] < meilleurS1) {
+            meilleurS1 = voitures[i].secteurs[0];
+        }
+        if (voitures[i].secteurs[1] < meilleurS2) {
+            meilleurS2 = voitures[i].secteurs[1];
+        }
+        if (voitures[i].secteurs[2] < meilleurS3) {
+            meilleurS3 = voitures[i].secteurs[2];
+        }
+        if (voitures[i].meilleur_temps < meilleurTour) {
+            meilleurTour = voitures[i].meilleur_temps;
+        }
+    }
+
+    fprintf(fichier, "\nMeilleurs temps par secteur :\n");
+    fprintf(fichier, "S1 : %.2f s\n", meilleurS1);
+    fprintf(fichier, "S2 : %.2f s\n", meilleurS2);
+    fprintf(fichier, "S3 : %.2f s\n", meilleurS3);
+    fprintf(fichier, "Meilleur tour : %.2f s\n", meilleurTour);
+
     fclose(fichier);
     printf("Résultats sauvegardés dans %s\n", nom_fichier);
 }
@@ -59,12 +82,6 @@ void lancerEssais(Voiture *pilotes, int nombre_pilotes, const char *nom_session)
     for (int tour = 1; tour <= nombre_tours; tour++) {
         printf("\n--- Tour %d ---\n", tour);
         for (int i = 0; i < nombre_pilotes; i++) {
-            // Vérifier si la voiture a déjà abandonné
-            if (pilotes[i].status == 'O') {
-                printf("Voiture %d a déjà abandonné.\n", pilotes[i].numero);
-                continue;  // Passer à la voiture suivante
-            }
-
             float temps_total = 0.0;
 
             // Générer les temps des 3 secteurs
@@ -82,16 +99,6 @@ void lancerEssais(Voiture *pilotes, int nombre_pilotes, const char *nom_session)
             // Mettre à jour le meilleur temps de la voiture
             if (temps_total < pilotes[i].meilleur_temps) {
                 pilotes[i].meilleur_temps = temps_total;
-            }
-
-            // Déterminer si la voiture va aux stands ou abandonne
-            int evenement = rand() % 10;  // Génère un nombre aléatoire entre 0 et 9
-            if (evenement == 0) {
-                pilotes[i].status = 'P';  // Aux stands
-                printf("Voiture %d est aux stands.\n", pilotes[i].numero);
-            } else if (evenement == 1) {
-                pilotes[i].status = 'O';  // Abandonne
-                printf("Voiture %d a abandonné la séance.\n", pilotes[i].numero);
             }
 
             printf("Voiture %d : %.2f s (S1: %.2f, S2: %.2f, S3: %.2f)\n",
@@ -126,9 +133,9 @@ void lancerEssais(Voiture *pilotes, int nombre_pilotes, const char *nom_session)
     // Sauvegarder les résultats dans un fichier
     sauvegarder_resultats(pilotes, nombre_pilotes, nom_session);
 
+
     printf("\n=== Fin des essais %s ===\n", nom_session);
 }
-
 
 void lancerEssaisP1(Voiture *pilotes, int nombre_pilotes) {
     lancerEssais(pilotes, nombre_pilotes, "essais_libres_P1");

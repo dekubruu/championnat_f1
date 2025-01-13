@@ -17,21 +17,27 @@ void initialiser_voiture(Voiture *v, int numero) {
 
 void generer_temps(Voiture *v) {
     if (v->status == 'R') {  // Si la voiture est en mode "roule"
+        // Probabilité d'aller aux stands ou d'abandonner
+        int random_event = rand() % 100;
+        if (random_event < 5) {
+            v->status = 'O';  // Abandon
+            printf("Voiture %d : Abandon\n", v->numero);
+            return;
+        } else if (random_event < 15) {
+            v->status = 'P';  // Aux stands
+            printf("Voiture %d : Aux stands\n", v->numero);
+            return;
+        }
+
         float temps_total = 0.0;
         for (int i = 0; i < 3; i++) {
-            v->secteurs[i] = (float)(rand() % 21 + 20);  // Temps aléatoire entre 20 et 40 secondes
+            v->secteurs[i] = (float)(rand() % 21 + 25);  // Temps aléatoire entre 20 et 40 secondes
             temps_total += v->secteurs[i];
-
-            // Mise à jour du meilleur temps dans le secteur
-            if (v->secteurs[i] < v->meilleur_secteur[i]) {
-                v->meilleur_secteur[i] = v->secteurs[i];
-            }
         }
-        v->meilleur_temps = temps_total;  // Mise à jour du meilleur temps total
-    } else {
-        printf("La voiture %d est hors course ou au stand.\n", v->numero);
+        v->meilleur_temps = temps_total;  // Mise à jour du meilleur temps
     }
 }
+
 
 void afficherClassementFinal(Voiture *pilotes, int nombre_pilotes) {
     printf("Classement final :\n");
